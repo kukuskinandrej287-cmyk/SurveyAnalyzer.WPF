@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyAnalyzer.WPF", "SurveyAnalyzer.WPF.csproj", "{84F19CD0-8CEC-48D8-912D-6137D41C33DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyAnalyzer.WPF.Tests", "..\SurveyAnalyzer.WPF.Tests\SurveyAnalyzer.WPF.Tests.csproj", "{A57E39FC-816D-40BA-A634-B83FE9DB0BCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84F19CD0-8CEC-48D8-912D-6137D41C33DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F19CD0-8CEC-48D8-912D-6137D41C33DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F19CD0-8CEC-48D8-912D-6137D41C33DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F19CD0-8CEC-48D8-912D-6137D41C33DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57E39FC-816D-40BA-A634-B83FE9DB0BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57E39FC-816D-40BA-A634-B83FE9DB0BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57E39FC-816D-40BA-A634-B83FE9DB0BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57E39FC-816D-40BA-A634-B83FE9DB0BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE35A6DE-D111-40F5-B14A-B0ABE5EA68E4}
+	EndGlobalSection
+EndGlobal

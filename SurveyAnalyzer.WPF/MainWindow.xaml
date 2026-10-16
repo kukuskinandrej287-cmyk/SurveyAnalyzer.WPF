@@ -1,0 +1,181 @@
+﻿<Window x:Class="SurveyAnalyzer.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Статистический анализатор данных опросов"
+        Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="650" MinWidth="1000">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============ ЗАГОЛОВОК ============ -->
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="📊 Статистический анализатор данных опросов"
+                       Style="{StaticResource HeaderText}"/>
+            <TextBlock Text="Программа для анализа результатов социологических опросов: вычисление статистик, сортировка, поиск аномалий и визуализация."
+                       Style="{StaticResource SubHeaderText}"/>
+        </StackPanel>
+
+        <!-- ============ ПАНЕЛЬ ВВОДА ============ -->
+        <Border Grid.Row="1" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                    <TextBlock Text="Количество респондентов" Style="{StaticResource LabelText}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="SliderCount"
+                                Minimum="10" Maximum="100000"
+                                Value="100" Width="200"
+                                ToolTip="Передвиньте ползунок или введите число справа."
+                                ValueChanged="SliderCount_ValueChanged"/>
+                        <TextBox x:Name="TxtCount"
+                                 Text="100" Width="80" Margin="10,0,0,0"
+                                 VerticalContentAlignment="Center"
+                                 ToolTip="Точное количество респондентов (от 10 до 100 000)."
+                                 TextChanged="TxtCount_TextChanged"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0,0,20,0">
+                    <TextBlock Text="Диапазон оценок" Style="{StaticResource LabelText}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="TxtMin" Text="1" Width="50"
+                                 VerticalContentAlignment="Center"
+                                 ToolTip="Минимальная оценка (по умолчанию 1)."/>
+                        <TextBlock Text="—" Margin="8,0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="TxtMax" Text="10" Width="50"
+                                 VerticalContentAlignment="Center"
+                                 ToolTip="Максимальная оценка (по умолчанию 10)."/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Grid.Column="2"
+                        x:Name="BtnGenerate"
+                        Content="🎲 Сгенерировать данные"
+                        Click="BtnGenerate_Click"
+                        VerticalAlignment="Bottom"
+                        ToolTip="Создаёт случайный массив оценок с заданными параметрами."/>
+            </Grid>
+        </Border>
+
+        <!-- ============ 6 КАРТОЧЕК ДЕЙСТВИЙ ============ -->
+        <UniformGrid Grid.Row="2" Columns="3" Rows="2" Margin="0,10,0,10">
+
+            <!-- Статистика -->
+            <Border Style="{StaticResource Card}" Margin="0,0,8,8">
+                <StackPanel>
+                    <TextBlock Text="📈 Статистика"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Среднее, медиана, мода, дисперсия, стандартное отклонение."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnOpenStats_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Откроет окно с полным набором статистических метрик."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Сортировка -->
+            <Border Style="{StaticResource Card}" Margin="8,0,8,8">
+                <StackPanel>
+                    <TextBlock Text="🔀 Сортировка"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="QuickSort и MergeSort с замером времени."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnOpenSort_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Откроет окно с выбором алгоритма и замером времени."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Аномалии -->
+            <Border Style="{StaticResource Card}" Margin="8,0,0,8">
+                <StackPanel>
+                    <TextBlock Text="⚠️ Аномалии"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Поиск выбросов методом IQR."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnOpenOutliers_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Найдёт выбросы методом IQR."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Данные -->
+            <Border Style="{StaticResource Card}" Margin="0,8,8,0">
+                <StackPanel>
+                    <TextBlock Text="📋 Данные"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Массив и распределение частот."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnOpenData_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Покажет первые 200 значений и таблицу частот."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Графики -->
+            <Border Style="{StaticResource Card}" Margin="8,8,8,0">
+                <StackPanel>
+                    <TextBlock Text="📊 Графики"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Гистограмма, box plot и диаграмма рассеяния."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnOpenCharts_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Откроет окно с тремя видами графиков."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Помощь -->
+            <Border Style="{StaticResource Card}" Margin="8,8,0,0">
+                <StackPanel>
+                    <TextBlock Text="❓ Помощь"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Пошаговое руководство для пользователя."
+                               Style="{StaticResource SubHeaderText}"
+                               Margin="0,6,0,12"/>
+                    <Button Content="Открыть"
+                            Click="BtnHelp_Click"
+                            HorizontalAlignment="Left"
+                            ToolTip="Откроет справку — как пользоваться программой."/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- ============ СТАТУСБАР ============ -->
+        <Border Grid.Row="3" Background="#E1E4E8" CornerRadius="6" Padding="12,8">
+            <TextBlock x:Name="TxtStatus"
+                       Text="💡 Готово к работе. Сначала сгенерируйте данные."
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"/>
+        </Border>
+    </Grid>
+</Window>
